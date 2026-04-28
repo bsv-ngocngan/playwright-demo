@@ -26,6 +26,10 @@ class BasePage:
     def get_attribute(self, selector, attribute): 
         return self.page.get_attribute(selector, attribute)
 
+    #hàm chọn option trong thẻ select theo value/label/index
+    def select_option(self, selector, value):
+        self.page.select_option(selector, value)
+
     #hàm kiểm tra xem một đoạn văn bản cụ thể có hiển thị trên trang hay không bằng cách sử dụng phương thức is_visible() của Playwright với selector được truyền vào
     def is_text_visible(self, text): 
         return self.page.is_visible(f"text={text}")

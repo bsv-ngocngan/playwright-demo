@@ -65,7 +65,7 @@ def test_login_013(access_to_login_page):
 def test_login_014(access_to_login_page):
     """Show error message when input full-width character テスト@テスト.テスト"""
     login_page = access_to_login_page
-    login_page.input_email("テスト@テスト.テスト")
+    login_page.input_email("testabc@gmailcom")
     login_page.clear_input(login_page.email_input)
     assert login_page.is_text_visible("メールアドレスが正しくありません 。" )
 
@@ -73,12 +73,8 @@ def test_login_014(access_to_login_page):
 def test_login_015(access_to_login_page):
     """Verify password label, input and mask icon state."""
     login_page = access_to_login_page
-    
-    #verify label
     assert login_page.is_text_visible("パスワード") 
-    #verify input visible
     assert login_page.is_element_visible(login_page.password_input) 
-    #verify icon visible
     assert login_page.is_element_visible(login_page.password_toggle_icon)
 
 def test_login_016(access_to_login_page):
@@ -89,24 +85,16 @@ def test_login_016(access_to_login_page):
     assert login_page.is_password_masked()
 
 def test_login_017(access_to_login_page):
-    """Click eye icon password to show password."""
     login_page = access_to_login_page
-    #nhập password "zzzz" vào trường password
     login_page.input_password("zzzz")
-    #click vào icon để toggle hiển thị password
     login_page.click(login_page.password_toggle_icon)
-    #kiểm tra xem password có đang được hiển thị hay không bằng cách gọi hàm is_password_unmasked() và assert kết quả trả về là True nếu password đang được hiển thị
     assert login_page.is_password_unmasked()
 
 def test_login_018_toggle_password_twice(access_to_login_page): 
     """Click eye icon twice to hide password.""" #reuse test case 016 and 017 để kiểm tra toggle password
     login_page = access_to_login_page
-    password = "zzzz"
-    #nhập password "zzzz" vào trường password → masked by default
-    login_page.input_password(password)
     login_page.input_password("zzzz")
     assert login_page.is_password_masked()
-
     #Click icon lần 1 → unmask password
     login_page.click(login_page.password_toggle_icon)
     assert login_page.is_password_unmasked()
