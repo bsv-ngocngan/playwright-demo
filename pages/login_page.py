@@ -1,4 +1,6 @@
 from pages.base_page import BasePage
+
+
 class LoginPage(BasePage):
     def __init__(self, page):
         super().__init__(page)
@@ -29,3 +31,6 @@ class LoginPage(BasePage):
         self.input_email(email)
         self.input_password(password)
         self.click(self.login_button)
+    
+    def clear_input(self, selector): #hàm xóa nội dung của một trường input được xác định bởi selector bằng cách sử dụng phương thức fill() của Playwright với giá trị rỗng
+        self.fill(selector, "")
